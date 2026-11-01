@@ -72,7 +72,7 @@ DSH 启动
 dsh plugin --profile desktop add github:AB-png123/dshplugin
 
 # B. 或者从 Release 下载 tgz 后安装（Windows 下路径改成 C:\...）
-dsh plugin --profile desktop add /path/to/dsh-hao-import-1.3.3.tgz
+dsh plugin --profile desktop add /path/to/dsh-hao-import-1.3.4.tgz
 ```
 
 > 仓库早前名为 `AB-png123/ceshi123`，GitHub 会自动重定向；当前地址是 `AB-png123/dshplugin`。
