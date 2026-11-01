@@ -2,6 +2,14 @@
 
 本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## 1.3.4 — 2026-11-01
+
+修复 1.3.3 引入的 Linux 回归。
+
+- 1.3.3 为 macOS 增加了「`/usr/bin/python3` 先检查 `xcode-select`」的保护，但这段逻辑没有限定平台。Linux 上 `/usr/bin/python3` 就是正常解释器，`xcode-select` 不存在会导致它被误判为不可用；只有 `/usr/bin/python3` 的系统会直接报「未找到 python3」。
+- 现在仅在 `uname -s` 为 `Darwin` 时启用 Xcode CLT 检查；Linux 的 `/usr/bin/python3` 正常参与版本校验。
+- CI 增加 Linux 回归步骤：`PATH=/usr/bin:/bin`、不设 `DSH_HAO_IMPORT_PYTHON`，必须能找到系统 Python 并通过 `--dry-run`。
+
 ## 1.3.3 — 2026-10-27
 
 macOS 兼容性复查后的一轮修复。

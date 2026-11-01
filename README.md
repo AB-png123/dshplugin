@@ -163,7 +163,7 @@ Windows 上删除 `%USERPROFILE%\.dsh-wallpaper-engine` 即可清理数据。
 
 ## 已知限制
 
-- 支持 macOS 与 Windows；Linux 走 bash 入口，理论可用但未专门测试。
+- 支持 macOS 与 Windows；Linux 的 bash 入口有 CI 覆盖，但 Hao Wallpaper 本身没有 Linux 版，实际没有可导入的数据源。
 - 依赖 Hao Wallpaper 的本地文件布局与元数据；Hao Wallpaper 改结构后需要同步调整脚本。
 - 动态壁纸只导入引擎支持的 `wallpaper.mp4`；Hao Wallpaper 只落地 `.webm` / `.mov`（或只有低清预览）时不会导入，并会打印原因。
 - 静态图只导入 `png / jpg / jpeg`；`.webp` / `.bmp` / `.gif` 等即使复制进 `uploads/` 引擎也不会显示，脚本会跳过。

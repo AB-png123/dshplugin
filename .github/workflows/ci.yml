@@ -31,6 +31,14 @@ jobs:
         if: runner.os != 'Windows'
         run: bash -n scripts/run-import.sh install.sh
 
+      - name: Linux fallback to /usr/bin/python3
+        if: runner.os == 'Linux'
+        run: |
+          tmp="$(mktemp -d)"
+          mkdir -p "$tmp/home" "$tmp/engine"
+          env -u DSH_HAO_IMPORT_PYTHON HOME="$tmp/home" DSH_WALLPAPER_ENGINE_DIR="$tmp/engine" PATH=/usr/bin:/bin \
+            /bin/bash scripts/run-import.sh --dry-run
+
       - name: Check PowerShell runner syntax
         if: runner.os == 'Windows'
         shell: pwsh

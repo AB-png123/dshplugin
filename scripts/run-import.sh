@@ -24,6 +24,12 @@ expand_home() {
 ENGINE="${DSH_WALLPAPER_ENGINE_DIR:-${DSH_WE_DATA_DIR:-$HOME/.dsh-wallpaper-engine}}"
 ENGINE="$(expand_home "$ENGINE")"
 LOG="$ENGINE/import.log"
+
+# /usr/bin/python3 只在 macOS 上可能是 Xcode 安装器存根；Linux 的它是正常解释器。
+IS_DARWIN=0
+if [ "$(uname -s 2>/dev/null)" = "Darwin" ]; then
+  IS_DARWIN=1
+fi
 COOL="$ENGINE/.last-run"
 
 log_fail() {
@@ -38,8 +44,8 @@ log_fail() {
 python_ok() {
   local exe="$1" v major minor
   [ -n "$exe" ] && [ -x "$exe" ] || return 1
-  # 未安装 Xcode CLT 时 /usr/bin/python3 只是会弹安装器/报许可错误的存根。
-  if [ "$exe" = "/usr/bin/python3" ]; then
+  # 未安装 Xcode CLT 时 /usr/bin/python3 只是会弹安装器/报许可错误的存根；Linux 不受此限。
+  if [ "$IS_DARWIN" -eq 1 ] && [ "$exe" = "/usr/bin/python3" ]; then
     command -v xcode-select >/dev/null 2>&1 || return 1
     xcode-select -p >/dev/null 2>&1 || return 1
   fi
